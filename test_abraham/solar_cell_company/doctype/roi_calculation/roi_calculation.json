@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-27 21:07:17.603378",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ub0v",
+  "customer",
+  "month",
+  "average_kw",
+  "low_tariff",
+  "roi",
+  "column_break_ajpq",
+  "customer_name",
+  "year",
+  "average_kwh",
+  "high_tarriff"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ub0v",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ajpq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "customer.full_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month",
+   "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+   "reqd": 1
+  },
+  {
+   "description": "Average power consumed per 15 minutes",
+   "fieldname": "average_kw",
+   "fieldtype": "Float",
+   "label": "Average KW",
+   "precision": "2"
+  },
+  {
+   "fieldname": "low_tariff",
+   "fieldtype": "Float",
+   "label": "Low Tariff",
+   "precision": "2"
+  },
+  {
+   "description": "ROI for a particular month in a particular year",
+   "fieldname": "roi",
+   "fieldtype": "Int",
+   "label": "ROI"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "label": "Year",
+   "reqd": 1
+  },
+  {
+   "description": "Average Power Consumed Per hour",
+   "fieldname": "average_kwh",
+   "fieldtype": "Float",
+   "label": "Average KWH",
+   "precision": "2"
+  },
+  {
+   "fieldname": "high_tarriff",
+   "fieldtype": "Float",
+   "label": "High Tarriff",
+   "precision": "2"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-03-27 21:18:10.220692",
+ "modified_by": "Administrator",
+ "module": "Solar Cell Company",
+ "name": "ROI Calculation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
