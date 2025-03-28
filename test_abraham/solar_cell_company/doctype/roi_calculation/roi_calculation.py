@@ -15,5 +15,5 @@ class ROICalculation(Document):
 			as_dict=True
 		)[0].get("customer_count", 0)
 
-		self.name = f"{self.customer}--{self.month}--{self.year}-{number_of_customer + 1}"
+		self.name = f"{self.customer}-{self.month}-{self.year}-{number_of_customer + 1}"
 

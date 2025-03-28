@@ -15,7 +15,8 @@
   "customer_name",
   "year",
   "average_kwh",
-  "high_tarriff"
+  "high_tarriff",
+  "amended_from"
  ],
  "fields": [
   {
@@ -59,7 +60,7 @@
    "fieldname": "low_tariff",
    "fieldtype": "Float",
    "label": "Low Tariff",
-   "precision": "2"
+   "precision": "5"
   },
   {
    "description": "ROI for a particular month in a particular year",
@@ -83,15 +84,25 @@
   {
    "fieldname": "high_tarriff",
    "fieldtype": "Float",
-   "label": "High Tarriff",
-   "precision": "2"
+   "label": "High Tariff",
+   "precision": "5"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "ROI Calculation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-27 21:18:10.220692",
+ "modified": "2025-03-28 11:02:07.793634",
  "modified_by": "Administrator",
  "module": "Solar Cell Company",
  "name": "ROI Calculation",
@@ -109,6 +120,69 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Master Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Customer",
+   "share": 1
   }
  ],
  "sort_field": "modified",

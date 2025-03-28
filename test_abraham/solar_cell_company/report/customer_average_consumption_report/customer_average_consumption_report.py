@@ -24,7 +24,7 @@ def execute(filters=None):
         FROM `tabPower Consumption` pc
         LEFT JOIN `tabCustomer` c ON pc.customer = c.name
         WHERE pc.date BETWEEN %s AND %s
-        GROUP BY pc.customer, c.customer_name
+        GROUP BY pc.customer, c.full_name
         """,
         (from_date, to_date),
         as_dict=True

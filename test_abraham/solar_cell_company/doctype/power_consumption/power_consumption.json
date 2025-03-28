@@ -12,7 +12,8 @@
   "column_break_pvnl",
   "customer_name",
   "kwh",
-  "kwh__"
+  "kwh__",
+  "amended_from"
  ],
  "fields": [
   {
@@ -34,8 +35,8 @@
   {
    "description": "Date the record was taken",
    "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
+   "fieldtype": "Datetime",
+   "label": "Date Time"
   },
   {
    "fetch_from": "customer.full_name",
@@ -53,10 +54,9 @@
   },
   {
    "fieldname": "tarriff",
-   "fieldtype": "Select",
-   "label": "Tarriff",
-   "options": "High\nLOw",
-   "reqd": 1
+   "fieldtype": "Data",
+   "label": "Tariff",
+   "read_only": 1
   },
   {
    "description": "The power consumption per hour",
@@ -65,13 +65,23 @@
    "label": "KWH",
    "precision": "2",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Power Consumption",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-27 21:06:58.175524",
+ "modified": "2025-03-28 10:57:31.917198",
  "modified_by": "Administrator",
  "module": "Solar Cell Company",
  "name": "Power Consumption",
@@ -86,6 +96,38 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Customer"
+  },
+  {
+   "read": 1,
+   "role": "Accounts Manager"
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
+  },
+  {
+   "create": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
    "share": 1,
    "submit": 1,
    "write": 1
