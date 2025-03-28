@@ -6,11 +6,26 @@
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Report",
- "filters": [],
+ "filters": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Datetime",
+   "label": "From Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Datetime",
+   "label": "To Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  }
+ ],
  "idx": 0,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2025-03-27 22:54:39.758295",
+ "modified": "2025-03-28 14:43:17.012403",
  "modified_by": "Administrator",
  "module": "Solar Cell Company",
  "name": "Customer Average Consumption Report",
@@ -22,6 +37,18 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Accounts User"
   }
  ],
  "timeout": 0

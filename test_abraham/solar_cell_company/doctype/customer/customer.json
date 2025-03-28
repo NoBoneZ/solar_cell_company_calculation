@@ -16,7 +16,9 @@
   "last_name",
   "phone_number",
   "user_email",
-  "amended_from"
+  "amended_from",
+  "average_kwh",
+  "average_kw"
  ],
  "fields": [
   {
@@ -24,6 +26,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "first_name",
    "fieldtype": "Data",
    "in_filter": 1,
@@ -90,6 +93,7 @@
    "search_index": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "full_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -105,12 +109,28 @@
    "in_standard_filter": 1,
    "label": "User Email",
    "read_only": 1
+  },
+  {
+   "fieldname": "average_kwh",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Average KWH",
+   "precision": "4",
+   "read_only": 1
+  },
+  {
+   "fieldname": "average_kw",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Average KW",
+   "precision": "4",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-28 10:23:31.152123",
+ "modified": "2025-03-28 15:00:53.665313",
  "modified_by": "Administrator",
  "module": "Solar Cell Company",
  "name": "Customer",

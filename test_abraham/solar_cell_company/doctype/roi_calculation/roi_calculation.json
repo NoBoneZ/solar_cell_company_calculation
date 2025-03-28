@@ -10,7 +10,6 @@
   "month",
   "average_kw",
   "low_tariff",
-  "roi",
   "column_break_ajpq",
   "customer_name",
   "year",
@@ -26,7 +25,11 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
@@ -39,49 +42,58 @@
    "fetch_from": "customer.full_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
    "label": "Customer Name",
    "read_only": 1
   },
   {
    "fieldname": "month",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Month",
    "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "description": "Average power consumed per 15 minutes",
    "fieldname": "average_kw",
    "fieldtype": "Float",
    "label": "Average KW",
-   "precision": "2"
+   "precision": "4"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "low_tariff",
    "fieldtype": "Float",
    "label": "Low Tariff",
    "precision": "5"
   },
   {
-   "description": "ROI for a particular month in a particular year",
-   "fieldname": "roi",
-   "fieldtype": "Int",
-   "label": "ROI"
-  },
-  {
    "fieldname": "year",
    "fieldtype": "Int",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Year",
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "description": "Average Power Consumed Per hour",
    "fieldname": "average_kwh",
    "fieldtype": "Float",
    "label": "Average KWH",
-   "precision": "2"
+   "precision": "4"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "high_tarriff",
    "fieldtype": "Float",
    "label": "High Tariff",
@@ -102,7 +114,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-28 11:02:07.793634",
+ "modified": "2025-03-28 15:04:46.765929",
  "modified_by": "Administrator",
  "module": "Solar Cell Company",
  "name": "ROI Calculation",
