@@ -174,11 +174,11 @@ app_license = "mit"
 # Overriding Methods
 # ------------------------------
 #
-override_whitelisted_methods = {
+# override_whitelisted_methods = {
 	# "frappe.desk.doctype.event.event.get_events": "test_abraham.event.get_events"
     # "frappe.desk.reportview.get": "test_abraham.utils.helper_functions.filtered_get_list"
 
-}
+# }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -244,3 +244,9 @@ override_whitelisted_methods = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+	{
+		"dt": "Role",
+		"filters": [["name", "in",["Customer"]]]
+	},
+]
