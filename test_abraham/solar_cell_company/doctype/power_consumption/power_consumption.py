@@ -28,7 +28,7 @@ class PowerConsumption(Document):
 			"""
 			SELECT COUNT(*) as customer_count 
 			FROM `tabPower Consumption` 
-			WHERE customer = %s
+			WHERE customer = %s 
 			""",
 			(self.customer,),
 			as_dict=True
@@ -49,7 +49,8 @@ class PowerConsumption(Document):
 		self.validate_future_dates()
 
 	def validate_future_dates(self):
-		if self.date > now_datetime:
+		formatted_date = datetime.strptime(self.date, "%Y-%m-%d %H:%M:%S") if isinstance(self.date, str) else self.date
+		if formatted_date > now_datetime():
 			frappe.throw("Power consumption can not be recorded for future dates")
 
 	def validate_unique(self):
@@ -59,7 +60,7 @@ class PowerConsumption(Document):
 		"""
 		if self.is_new() and frappe.db.exists(
 			"Power Consumption", 
-			{"date": self.date, "customer": self.customer, "kwh": self.kwh, "kwh__": self.kwh__}
+			{"date": self.date, "customer": self.customer, "kwh": self.kwh, "kwh__": self.kwh__, "docstatus": "1"}
 		):
 			frappe.throw("A record for this date with the same KWH and KW already exists.")
 
@@ -84,7 +85,7 @@ class PowerConsumption(Document):
 		query_avg = """ 
 			SELECT AVG(kwh) AS average_kw, AVG(kwh__) AS average_kwh 
 			FROM `tabPower Consumption` 
-			WHERE customer = %s
+			WHERE customer = %s AND docstatus = 1
 		"""
 
 		# Execute the query and fetch the result
@@ -161,7 +162,7 @@ class PowerConsumption(Document):
 			SELECT kwh, kwh__, date
 			FROM `tabPower Consumption`
 			WHERE customer = %s
-			AND date BETWEEN %s AND %s
+			AND date BETWEEN %s AND %s AND docstatus = 1
 		"""
 		current_records = frappe.db.sql(query_raw, (self.customer, start_date, end_date), as_dict=True)
 
@@ -173,6 +174,7 @@ class PowerConsumption(Document):
 			SELECT AVG(kwh) as average_kw, AVG(kwh__) as average_kwh
 			FROM `tabPower Consumption`
 			WHERE customer = %s
+			AND docstatus = 1
 			AND date BETWEEN %s AND %s
 		"""
 		avg_result = frappe.db.sql(query_avg, (self.customer, start_date, end_date), as_dict=True)
@@ -186,6 +188,7 @@ class PowerConsumption(Document):
 				AVG(CASE WHEN tarriff = 'Low' THEN kwh__ ELSE NULL END) AS average_kwh_low
 			FROM `tabPower Consumption`
 			WHERE customer = %s
+			AND docstatus = 1
 			AND date BETWEEN %s AND %s
 		"""
 		tariff_result = frappe.db.sql(query_tarriff, (self.customer, start_date, end_date), as_dict=True)
@@ -235,9 +238,6 @@ class PowerConsumption(Document):
 
 		frappe.db.commit()
 		return
-	
-	def on_thrash(self):
-		self.recalculate_roi_after_deletion()
 
 	
 	def on_cancel(self):
@@ -276,7 +276,7 @@ class PowerConsumption(Document):
 		query_count = """
 			SELECT COUNT(*) as record_count
 			FROM `tabPower Consumption`
-			WHERE customer = %s AND date BETWEEN %s AND %s
+			WHERE customer = %s AND date BETWEEN %s AND %s AND DOCSTATUS = 1
 		"""
 		record_count = frappe.db.sql(query_count, (self.customer, start_date, end_date), as_dict=True)[0]["record_count"]
 
@@ -296,7 +296,7 @@ class PowerConsumption(Document):
 		query_avg = """
 			SELECT AVG(kwh) as average_kw, AVG(kwh__) as average_kwh
 			FROM `tabPower Consumption`
-			WHERE customer = %s AND date BETWEEN %s AND %s
+			WHERE customer = %s AND date BETWEEN %s AND %s AND DOCSTATUS = 1
 		"""
 		avg_result = frappe.db.sql(query_avg, (self.customer, start_date, end_date), as_dict=True)
 		average_kw = avg_result[0]["average_kw"] if avg_result else 0
@@ -308,7 +308,7 @@ class PowerConsumption(Document):
 				AVG(CASE WHEN tarriff = 'High' THEN kwh__ ELSE NULL END) AS average_kwh_high,
 				AVG(CASE WHEN tarriff = 'Low' THEN kwh__ ELSE NULL END) AS average_kwh_low
 			FROM `tabPower Consumption`
-			WHERE customer = %s AND date BETWEEN %s AND %s
+			WHERE customer = %s AND date BETWEEN %s AND %s AND DOCSTATUS = 1
 		"""
 		tariff_result = frappe.db.sql(query_tariff, (self.customer, start_date, end_date), as_dict=True)
 		average_low = tariff_result[0]["average_kwh_low"] if tariff_result else 0
@@ -318,15 +318,16 @@ class PowerConsumption(Document):
 		high_tariff = 0.3 * average_high if average_high else 0
 
 		# Update the existing ROI Calculation record
-		frappe.db.set_value(
-			"ROI Calculation",
-			{"customer": self.customer, "month": month_dict.get(str(month), "").capitalize(), "year": year},
-			{
-				"average_kw": average_kw,
-				"average_kwh": average_kwh,
-				"low_tariff": low_tariff,
-				"high_tarriff": high_tariff,
-			}
-		)
-
+		query_update = """
+			UPDATE `tabROI Calculation`
+			SET 
+				average_kw = %s,
+				average_kwh = %s,
+				low_tariff = %s,
+				high_tarriff = %s
+			WHERE customer = %s 
+			AND month = %s
+			AND year = %s
+		"""
+		frappe.db.sql(query_update, (average_kw, average_kwh, low_tariff, high_tariff, self.customer, month_dict.get(str(month), "").capitalize(), year))
 		frappe.db.commit()

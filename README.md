@@ -60,6 +60,7 @@ bench install-app test_abraham
 
 ### 4. Start the Frappe Server
 ```sh
+nvm use 18
 bench start
 ```
 Now you can access the app via your browser at `http://localhost:8000`.
@@ -70,8 +71,8 @@ For more details on Frappe installation and configuration, visit the official Fr
 [https://frappeframework.com/docs](https://frappeframework.com/docs)
 
 
-For more details on the app 
-[https://docs.google.com/document/d/1WL_ZGI-GodEBEHkhEQEjEpPG4A2H3DH3gH84foJDIRs/edit?usp=sharing](Click Here)
+For more details on the app, [click here](https://docs.google.com/document/d/1WL_ZGI-GodEBEHkhEQEjEpPG4A2H3DH3gH84foJDIRs/edit?usp=sharing).
+
 
 
 ## License
